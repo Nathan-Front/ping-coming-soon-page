@@ -1,7 +1,6 @@
 body{
     margin: 0 auto;
     padding: 0;
-    width: 1440px;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -11,7 +10,7 @@ body{
     font-size: 20px;
 }
 .main--container{
-    margin: 0 30%;
+    margin: 5% 30% 0 30%;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -25,7 +24,7 @@ body{
     width: 13%;
 }
 h1{
-    margin: 5% 0 3% 0;
+    margin: 7% 0 3% 0;
     font-size: 2.5em;
     color: hsl(0, 0%, 59%);
     font-weight: 300;
@@ -35,7 +34,7 @@ span{
     font-weight: 700;
 }
 .text_darkblue{
-    margin: 0;
+    margin: 7% 0 0 0;
     color: hsl(209, 33%, 12%);
     font-weight: 300;
 }
@@ -43,7 +42,7 @@ article{
     width: 100%;
 }
 form{
-    margin: 5% 0 0 0;
+    margin: 7% 0 0 0;
     width: 100%;
     display: flex;
     grid-gap: 3%;
@@ -55,29 +54,42 @@ form>div{
     flex-direction: column;
     position: relative;
 }
-#errorMessage{
-    width: 50%;
-    position: absolute;
-    bottom: -40%;
-    left: 0;
-}
-#input_text{
+.validate-form>input{
     padding: 3.5% 0;
     width: 100%;
     border: solid 0.5px;
     border-radius: 30px;
-    border-color: hsl(223, 87%, 63%);
     text-indent: 5%;
 }
-#input_button{
+.validate-form input:focus {
+    outline: 0.5px solid hsl(223, 87%, 63%);
+}
+.validate-form.error input {
+	border-color: #e74c3c;
+}
+.validate-form span {
+    width: 50%;
+    position: absolute;
+    bottom: -40%;
+    left: 5%;
+    color: red;
+    font-size: 13px;
+    text-align: left;
+	visibility: hidden;
+}
+.validate-form.error span {
+	visibility: visible;
+}
+button{
     padding: 2% 8%;
     border-radius: 30px;
     border-style: none;
     background-color:  hsl(223, 87%, 63%);
     color: white;
     font-weight: 600;
+    width: 35%;
 }
-#input_button:hover{
+button:hover{
     cursor: pointer;
 }
 .dashboard{
@@ -113,11 +125,11 @@ ul>li>a{
     padding: 3px;
 }
 footer>p{
-    margin: 0;
+    margin: 0 0 5% 0;
     font-size: 16px;
     color: hsl(0, 0%, 59%);
 }
-@media only screen and (max-width:768px){
+@media only screen and (max-width:860px){
     body{
         width: auto;
     }
@@ -145,17 +157,15 @@ footer>p{
     div{
         position: relative;
     }
-    #errorMessage{
+    .validate-form span {
         width: 80%;
-        text-align: left;
-        margin-left: 15%;
+        left: 20%;
+        bottom: -45%;
     }
-    #input_text{
-        padding: 5% 0;
-    }
-    #input_button{
-        margin-top: 10%;
-        padding: 5% 20%;
+    button{
+        padding: 3.5% 0;
+        margin: 10% 0 0 0;
+        width: 100%;
     }
     .dashboard{
         margin: 15% 0 25% 0;
