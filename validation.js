@@ -1,34 +1,33 @@
-document.addEventListener('invalid', (function(){
-    return function(e) {
-      //prevent the browser from showing default error bubble / hint
-      e.preventDefault();
-    };
-})(), true);
+const form = document.getElementById("form");
+const email = document.getElementById('input_text');
 
-function emptyMessage() {
-var empty = document.forms["form"]["input"].value;
-var error = document.getElementById("errorMessage");
-var input = document.getElementById("input_text");
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-if (empty == "") {
-    // Create new element with empty error message 
-    error.textContent = "This should not be empty";
-    error.style.color = "red";
-    error.style.position ="absolute";
-    error.style.fontSize = "13px";
-    input.style.borderColor = "hsl(354, 100%, 66%)";
-return false;
+    validateInput();
+});
+
+//Validate the input 
+function validateInput(){
+	const emailValue = email.value.trim();
+
+	if(emailValue === '') {
+		setErrorFor(email, 'This should not be empty');
+	} else if (!isEmail(emailValue)) {
+		setErrorFor(email, 'Please enter a valid email');
+	} else{
+        return true;
+    }
+}
+//append the class in the CSS 
+function setErrorFor(input, message) {
+	const validateForm = input.parentElement;
+	const span = validateForm.querySelector('span');
+	validateForm.className = 'validate-form error';
+	span.innerText = message;
 }
 
-if (isNaN(document.getElementById("input_text").value)) 
-{  
-    // Create new element with email error message
-    error.textContent = "Please enter a valid email";
-    error.style.color = "red";
-    error.style.position ="absolute";
-    error.style.fontSize = "13px";
-    input.style.borderColor = "hsl(354, 100%, 66%)";
-} else {
-    error.textContent = "";
-}
+//use to check if the email is actually an email or not
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
